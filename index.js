@@ -24,7 +24,17 @@ async function run() {
   try {
 
     const allArticlesCollection =client.db('newsPaper').collection('allArticles');
+    const usersCollection =client.db('newsPaper').collection('users');
 
+
+      //  user related
+    app.post('/users', async(req, res)=>{
+      const user = req.body;
+      const result = await usersCollection.insertOne(user);
+      res.send(result)
+     })
+
+    //  articles related
     app.get('/allArticles', async(req, res)=>{
       const cursor = allArticlesCollection.find();
       const result = await cursor.toArray();
@@ -42,6 +52,9 @@ async function run() {
       const result = await allArticlesCollection.insertOne(user);
       res.send(result)
      })
+
+   
+
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
     // Send a ping to confirm a successful connection
