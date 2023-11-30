@@ -32,12 +32,12 @@ async function run() {
       //  user related
       app.get('/users', async(req, res)=>{
         const result= await usersCollection.find().toArray();
-        res.send(result)
+        res.send(result);
       })
     app.post('/users', async(req, res)=>{
       const user = req.body;
       const result = await usersCollection.insertOne(user);
-      res.send(result)
+      res.send(result);
      })
 
      app.patch("/users/admin/:id", async(req,res)=>{
@@ -48,19 +48,19 @@ async function run() {
           role:'admin'
         }
       }
-      const result = await usersCollection.updateOne(filter, updateDoc)
+      const result = await usersCollection.updateOne(filter, updateDoc);
      })
 
      
     //  publisher
     app.get('/publisher', async(req, res)=>{
       const result= await publisherCollection.find().toArray();
-      res.send(result)
+      res.send(result);
     })
     app.post('/publisher', async(req, res)=>{
       const user = req.body;
       const result = await publisherCollection.insertOne(user);
-      res.send(result)
+      res.send(result);
      })
 
 
@@ -68,19 +68,19 @@ async function run() {
     app.get('/allArticles', async(req, res)=>{
       const cursor = allArticlesCollection.find();
       const result = await cursor.toArray();
-      res.send(result)
+      res.send(result);
 
     })
     app.get('/allArticles/:id', async(req, res)=>{
       const id = req.params.id;
       const result =await allArticlesCollection.findOne({_id: new ObjectId(id)});
-      res.send(result)
+      res.send(result);
 
     })
      app.post('/allArticles', async(req, res)=>{
       const user = req.body;
       const result = await allArticlesCollection.insertOne(user);
-      res.send(result)
+      res.send(result);
      })
 
    
