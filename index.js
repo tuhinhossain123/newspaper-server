@@ -23,6 +23,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
 
+    const publisherCollection =client.db('newsPaper').collection('publisher');
     const allArticlesCollection =client.db('newsPaper').collection('allArticles');
     const usersCollection =client.db('newsPaper').collection('users');
 
@@ -49,7 +50,19 @@ async function run() {
       const result = await usersCollection.updateOne(filter, updateDoc)
      })
 
+     
+    //  publisher
+    app.get('/publisher', async(req, res)=>{
+      const result= await publisherCollection.find().toArray();
+      res.send(result)
+    })
+    app.post('/publisher', async(req, res)=>{
+      const user = req.body;
+      const result = await publisherCollection.insertOne(user);
+      res.send(result)
+     })
 
+     
     //  articles related
     app.get('/allArticles', async(req, res)=>{
       const cursor = allArticlesCollection.find();
