@@ -28,6 +28,7 @@ async function run() {
     const usersCollection =client.db('newsPaper').collection('users');
 
 
+
       //  user related
       app.get('/users', async(req, res)=>{
         const result= await usersCollection.find().toArray();
@@ -62,7 +63,7 @@ async function run() {
       res.send(result)
      })
 
-     
+
     //  articles related
     app.get('/allArticles', async(req, res)=>{
       const cursor = allArticlesCollection.find();
